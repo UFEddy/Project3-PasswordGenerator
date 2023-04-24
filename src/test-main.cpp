@@ -12,7 +12,6 @@ int main () {
     std::string file = "archive/rockyou.txt";
     std::string passwords;
     
-
     std::cout << "Loading Dataset..." << std::endl;
     std::ifstream inFile(file);
     if (inFile.is_open()) {        
