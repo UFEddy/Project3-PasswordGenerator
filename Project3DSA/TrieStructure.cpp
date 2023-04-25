@@ -3,9 +3,7 @@
 Trie::TrieNode::~TrieNode() {
   
 }
-Trie::Trie::~Trie() {
-    Destruct();
-}
+
 Trie::TrieNode* Trie::HelperInsert(TrieNode* root, std::string& words) {
     
     if (root == nullptr) {
