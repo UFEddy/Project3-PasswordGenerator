@@ -2,15 +2,20 @@
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
+#include <time.h>
+#include "TrieStructure.h"
+
 int main() {
     Set pass;
     int input = 0;
     string searchSet;
-    ifstream infile("rockyou.txt");
+    Trie passTrie;
+    ifstream infile("archive/rockyou.txt");
     if (infile.is_open()) {
         string line;
         while (getline(infile, line)) {
            pass.insert(line);
+           passTrie.Insert(line);
         }
         infile.close();
     } else {
@@ -31,6 +36,16 @@ int main() {
             }
             else {
                 cout << "Password is not found in set. " << endl;
+            }
+        }
+        if (input == 2){
+            cout << "What password would you like to search? " << endl;
+            cin >> searchSet;
+            if (passTrie.Search(searchSet)){
+                cout << "Password is found in Trie! " << endl;
+            }
+            else {
+                cout << "Password is not found in Trie. " << endl;
             }
         }
         if(input == 3){

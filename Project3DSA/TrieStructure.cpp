@@ -1,11 +1,9 @@
 #include "TrieStructure.h"
 
 Trie::TrieNode::~TrieNode() {
-  
+   //Destruct();
 }
-Trie::Trie::~Trie() {
-    Destruct();
-}
+
 Trie::TrieNode* Trie::HelperInsert(TrieNode* root, std::string& words) {
     
     if (root == nullptr) {
@@ -27,6 +25,7 @@ Trie::TrieNode* Trie::HelperInsert(TrieNode* root, std::string& words) {
 void Trie::Insert(std::string& word) {
     this->root = HelperInsert(this->root, word);
 }
+
 bool Trie::HelperSearch(TrieNode* root, std::string words) {
     TrieNode* currNode = root;
 
@@ -39,20 +38,46 @@ bool Trie::HelperSearch(TrieNode* root, std::string words) {
     }
     return (currNode->isEndOfWord);
 }
+
 bool Trie::Search(std::string word) {
     return HelperSearch(this->root, word);
 }
+
+Trie::TrieNode* Trie::HelperDelete(TrieNode* root, std::string word, int depth) {
+    if (root == nullptr) {
+        return root;
+    }
+
+    if(depth == word.size()) {
+        if (root->isEndOfWord) {
+            root->charCount--;
+            root->isEndOfWord = false;
+        }
+
+        if(root->charCount == 0) {
+            delete root;
+            return nullptr;
+        }
+    }
+    return root;
+}
+
+void Trie::Delete(std::string word, int depth) {
+    HelperDelete(this->root, word, depth);
+}
+
 void Trie::HelperDestruct(TrieNode* root) {
     if (root == nullptr) {
         return;
     }
     
-    for (auto key: root->children) {
-        HelperDestruct (key.second);
+    for (int i = 0; i < CHAR_SIZE; i++) {
+        HelperDestruct (root->children[i]);
     }
 
     delete root;
 }
+
 void Trie::Destruct() {
     HelperDestruct(this->root);
 }
