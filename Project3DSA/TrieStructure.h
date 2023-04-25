@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <unordered_map>
-const int CHAR_SIZE= 128; // Lowercase characters only
+
 // https://www.geeksforgeeks.org/introduction-to-trie-data-structure-and-algorithm-tutorials/
 // https://www.geeksforgeeks.org/trie-delete/
 // https://www.digitalocean.com/community/tutorials/trie-data-structure-in-c-plus-plus
@@ -19,14 +19,12 @@ class Trie{
         };
         TrieNode* root = nullptr;
         Trie::TrieNode* HelperInsert(TrieNode* root, std::string& word);
-        Trie::TrieNode* HelperDelete(TrieNode* root, std::string word, int depth);
         bool HelperSearch(TrieNode* root, std::string word);
         void HelperDestruct(TrieNode* root);
 
     public:
         Trie(): root(new TrieNode()) {}
         void Insert(std::string& word);
-        void Delete(std::string word, int depth);
         bool Search(std::string word);
         void Destruct();
 };
