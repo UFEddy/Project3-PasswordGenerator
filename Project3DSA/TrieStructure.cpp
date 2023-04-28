@@ -11,6 +11,7 @@ Trie::TrieNode* Trie::HelperInsert(TrieNode* root, std::string& words) {
     }
     TrieNode* currNode = root;
 
+    // Loop for iterating through each char in string and checking if it matches a Node, if not create a new Node
     for (auto key: words) {
             if (currNode->children.find(key) == currNode->children.end()) {
             TrieNode* newNode = new TrieNode();
@@ -18,6 +19,8 @@ Trie::TrieNode* Trie::HelperInsert(TrieNode* root, std::string& words) {
         }
         currNode = currNode->children[key];
     }
+
+    // Track Character count and end of word to determine when end of word is reached for search
     currNode->charCount++;
     currNode->isEndOfWord = true;
     return root;
@@ -28,6 +31,7 @@ void Trie::Insert(std::string& word) {
 bool Trie::HelperSearch(TrieNode* root, std::string words) {
     TrieNode* currNode = root;
 
+    // Iterate through all characters in string search for them in the nodes children and return boolean result of isEndOfWord
     for (auto key: words) {
 
         if (currNode->children.find(key) == currNode->children.end()) {
@@ -45,6 +49,7 @@ void Trie::HelperDestruct(TrieNode* root) {
         return;
     }
     
+    // Iterate through all node and children calling helper destruct to delete nodes
     for (auto key: root->children) {
         HelperDestruct (key.second);
     }
