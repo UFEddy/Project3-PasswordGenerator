@@ -5,3 +5,5 @@ archive/*
 main.exe
 rockyou.txt
 .gitignore
+src/
+src/*
